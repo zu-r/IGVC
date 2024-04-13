@@ -12,7 +12,7 @@ to setup your workspace, run these commands in your terminal:
     cd ~/catkin_ws/src
     catkin_create_pkg igvc
     cd ~/catkin_ws
-    catkin_make
+    catkin build
 
 this creates a folder named catkin_ws, and creates a package named igvc
 
@@ -32,7 +32,7 @@ replace it with
 now run
 
     cd ~/catkin_ws
-    catkin_make
+    catkin build
 
 
 your environment should now be all setup
@@ -40,5 +40,5 @@ your environment should now be all setup
 to run a gazebo simulation, run these commands:
    
     cd ~/catkin_ws
-    source devel/setup.bash
+    source devel/setup.bash OR source devel/setup.zsh  (depending on if you are using bash or zsh terminal)
     roslaunch igvc diffdrive.launch
