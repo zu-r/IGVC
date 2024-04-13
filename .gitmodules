@@ -1,0 +1,3 @@
+[submodule "catkin_ws"]
+	path = catkin_ws
+	url = ./catkin_ws
