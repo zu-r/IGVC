@@ -1,6 +1,8 @@
 instructions for ROS installation:
 
-MacOS (M1): https://www.youtube.com/watch?app=desktop&v=zF7Pbq4Puvg
+MacOS (M1): 
+https://medium.com/robostack/cross-platform-conda-packages-for-ros-fa1974fd1de3
+https://www.youtube.com/watch?app=desktop&v=zF7Pbq4Puvg
 Windows: https://wiki.ros.org/noetic/Installation/Windows
 Ubuntu (ideally use Ubuntu): https://wiki.ros.org/noetic/Installation/Ubuntu
 
