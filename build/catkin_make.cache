@@ -1,0 +1,2 @@
+igvc
+-DCATKIN_DEVEL_PREFIX=/Users/zu/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/Users/zu/catkin_ws/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/Users/zu/catkin_ws/install
+
+Name: igvc
+Description: Description of igvc
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
