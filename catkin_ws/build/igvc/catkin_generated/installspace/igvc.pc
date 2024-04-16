@@ -1,4 +1,4 @@
-prefix=/Users/zu/catkin_ws/install
+prefix=/home/lab3/catkin_ws/install
 
 Name: igvc
 Description: Description of igvc

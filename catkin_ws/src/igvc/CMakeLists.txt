@@ -155,10 +155,24 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+catkin_install_python(PROGRAMS
+  scripts/arrowkey.py
+  scripts/movement.py
+  scripts/broadcaster.py
+  scripts/moveBase.py
+  scripts/image_lane_detection.py
+  scripts/lane_detection.py
+  # scripts/lane_detection/__init__.py
+  scripts/lane_detection/center_line_detection.py
+  scripts/lane_detection/control_module.py
+  scripts/lane_detection/lane_detection_module.py
+  scripts/lane_detection/outer_lane_detection.py
+  scripts/cv_bridge_tutorial.py
+
+  # scripts/odom_publisher.py
+  # scripts/state_publisher.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
@@ -175,11 +189,11 @@ include_directories(
 # )
 
 ## Mark cpp header files for installation
-# install(DIRECTORY include/${PROJECT_NAME}/
-#   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#   FILES_MATCHING PATTERN "*.h"
-#   PATTERN ".svn" EXCLUDE
-# )
+install(DIRECTORY include/
+  DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}
+  PATTERN ".svn" EXCLUDE
+)
+
 
 ## Mark other files for installation (e.g. launch and bag files, etc.)
 # install(FILES
@@ -192,7 +206,8 @@ include_directories(
 ## Testing ##
 #############
 
-## Add gtest based cpp test target and link libraries
+## Add gtest baseddfdfcode .
+#  cpp test target and link libraries
 # catkin_add_gtest(${PROJECT_NAME}-test test/test_igvc.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})

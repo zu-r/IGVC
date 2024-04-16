@@ -1,8 +1,8 @@
-# Install script for directory: /Users/zu/catkin_ws/src/igvc
+# Install script for directory: /home/lab3/catkin_ws/src/igvc
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/Users/zu/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/lab3/catkin_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,28 +27,76 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "1")
+endif()
+
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set default install directory permissions.
-if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "/opt/miniconda3/envs/ROS/bin/llvm-objdump")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/igvc.pc")
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/Users/zu/catkin_ws/build/igvc/catkin_generated/installspace/igvc.pc")
-endif()
-
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/igvc/cmake" TYPE FILE FILES
-    "/Users/zu/catkin_ws/build/igvc/catkin_generated/installspace/igvcConfig.cmake"
-    "/Users/zu/catkin_ws/build/igvc/catkin_generated/installspace/igvcConfig-version.cmake"
+    "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/igvcConfig.cmake"
+    "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/igvcConfig-version.cmake"
     )
 endif()
 
-if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/igvc" TYPE FILE FILES "/Users/zu/catkin_ws/src/igvc/package.xml")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/igvc" TYPE FILE FILES "/home/lab3/catkin_ws/src/igvc/package.xml")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/arrowkey.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/movement.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/broadcaster.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/moveBase.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/image_lane_detection.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/lane_detection.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/center_line_detection.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/control_module.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/lane_detection_module.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/outer_lane_detection.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/igvc" TYPE PROGRAM FILES "/home/lab3/IGVC/catkin_ws/build/igvc/catkin_generated/installspace/cv_bridge_tutorial.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include" TYPE DIRECTORY FILES "/home/lab3/catkin_ws/src/igvc/include/" REGEX "/\\.svn$" EXCLUDE)
 endif()
 
