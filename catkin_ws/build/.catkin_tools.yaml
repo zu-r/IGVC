@@ -1,0 +1,6 @@
+devel_space: /home/lab3/IGVC/catkin_ws/devel
+install: false
+install_space: /home/lab3/IGVC/catkin_ws/install
+profile: default
+source_space: /home/lab3/IGVC/catkin_ws/src
+workspace: /home/lab3/IGVC/catkin_ws

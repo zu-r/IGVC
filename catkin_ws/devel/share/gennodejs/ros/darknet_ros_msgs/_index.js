@@ -1,6 +1,1 @@
-
-"use strict";
-
-module.exports = {
-  msg: require('./msg/_index.js'),
-};
+/home/lab3/IGVC/catkin_ws/devel/.private/darknet_ros_msgs/share/gennodejs/ros/darknet_ros_msgs/_index.js

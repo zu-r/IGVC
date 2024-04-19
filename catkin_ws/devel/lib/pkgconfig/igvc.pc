@@ -1,8 +1,1 @@
-prefix=/home/lab3/catkin_ws/devel
-
-Name: igvc
-Description: Description of igvc
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
+/home/lab3/IGVC/catkin_ws/devel/.private/igvc/lib/pkgconfig/igvc.pc

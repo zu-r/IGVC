@@ -1,6 +1,1 @@
-(cl:in-package darknet_ros_msgs-msg)
-(cl:export '(HEADER-VAL
-          HEADER
-          COUNT-VAL
-          COUNT
-))
+/home/lab3/IGVC/catkin_ws/devel/.private/darknet_ros_msgs/share/common-lisp/ros/darknet_ros_msgs/msg/_package_ObjectCount.lisp

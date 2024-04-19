@@ -1,16 +1,1 @@
-(cl:in-package darknet_ros_msgs-msg)
-(cl:export '(PROBABILITY-VAL
-          PROBABILITY
-          XMIN-VAL
-          XMIN
-          YMIN-VAL
-          YMIN
-          XMAX-VAL
-          XMAX
-          YMAX-VAL
-          YMAX
-          ID-VAL
-          ID
-          CLASS-VAL
-          CLASS
-))
+/home/lab3/IGVC/catkin_ws/devel/.private/darknet_ros_msgs/share/common-lisp/ros/darknet_ros_msgs/msg/_package_BoundingBox.lisp

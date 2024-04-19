@@ -1,0 +1,8 @@
+prefix=/home/lab3/IGVC/catkin_ws/devel/.private/usma_gazebo
+
+Name: usma_gazebo
+Description: Description of usma_gazebo
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

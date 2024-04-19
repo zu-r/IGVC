@@ -1,6 +1,1 @@
-(cl:in-package darknet_ros_msgs-msg)
-(cl:export '(ID-VAL
-          ID
-          BOUNDING_BOXES-VAL
-          BOUNDING_BOXES
-))
+/home/lab3/IGVC/catkin_ws/devel/.private/darknet_ros_msgs/share/common-lisp/ros/darknet_ros_msgs/msg/_package_CheckForObjectsResult.lisp

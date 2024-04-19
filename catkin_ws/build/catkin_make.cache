@@ -1,2 +1,0 @@
-darknet_ros/darknet_ros:darknet_ros/darknet_ros_msgs:igvc
--DCATKIN_DEVEL_PREFIX=/home/lab3/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/lab3/catkin_ws/install -G Unix Makefiles
