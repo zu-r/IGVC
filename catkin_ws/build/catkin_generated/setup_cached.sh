@@ -7,4 +7,6 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/lab3/IGVC/catkin_ws/build'
+export PWD='/home/rutgersieee/IGVC/catkin_ws/build'
+export PYTHONPATH='/opt/ros/noetic/lib/python3/dist-packages'
+export ROS_PACKAGE_PATH='/home/rutgersieee/catkin_ws/src:/home/rutgersieee/catkin_ws/src:/opt/ros/noetic/share'

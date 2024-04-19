@@ -1,4 +1,4 @@
-prefix=/home/lab3/catkin_ws/devel
+prefix=/home/rutgersieee/catkin_ws/devel
 
 Name: igvc
 Description: Description of igvc

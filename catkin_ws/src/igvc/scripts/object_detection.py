@@ -1,79 +1,94 @@
-import roslib  # Import the roslib package
-roslib.load_manifest('igvc')  # Load the manifest for the 'igvc' package
-import sys  # Import the sys module
-import rospy  # Import the rospy package (ROS Python client library)
-import cv2  # Import the OpenCV library (cv2)
-import numpy as np  # Import NumPy library
-from std_msgs.msg import String  # Import the String message type from std_msgs
-from sensor_msgs.msg import Image as ImageMsg  # Import the Image message type from sensor_msgs and rename it to avoid conflicts
-from cv_bridge import CvBridge, CvBridgeError  # Import CvBridge for converting between ROS Image messages and OpenCV images
-from PIL import Image  # Import the Image module from PIL library for image processing
+#!/usr/bin/python3
+from __future__ import print_function
 
-class object_detection:
-    orange = [0, 165, 255]  # Define the color orange in BGR colorspace
+import roslib
+roslib.load_manifest('igvc')
+import sys
+import rospy
+import cv2
+import numpy as np
+from std_msgs.msg import String
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge, CvBridgeError
 
-    # Constructor method (__init__) for object_detection class
+class image_converter:
+
     def __init__(self):
-        rospy.init_node('object_detection', anonymous=True)  # Initialize a ROS node named 'object_detection'
-        self.image_pub = rospy.Publisher("laser_object/depth/image_raw_2", ImageMsg, queue_size=10)  # Create a publisher for image messages
-        self.bridge = CvBridge()  # Initialize CvBridge for image conversion
-        self.image_sub = rospy.Subscriber("laser_object/depth/image_raw", ImageMsg, self.callback)  # Create a subscriber for image messages
+        rospy.init_node('image_converter', anonymous=True)
+        self.image_pub = rospy.Publisher("laser_object/depth/image_raw_2", Image, queue_size=10)
+        self.bridge = CvBridge()
+        self.image_sub = rospy.Subscriber("laser_object/depth/image_raw", Image, self.callback)
 
-    # Callback method to handle incoming image messages
     def callback(self, data):
         try:
-            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")  # Convert ROS Image message to OpenCV image format
+            cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
         except CvBridgeError as e:
             print(e)
             return
 
-        hsvImage = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)  # Convert BGR image to HSV color space
+        # Convert image to HSV
+        hsv_img = cv2.cvtColor(cv_image, cv2.COLOR_BGR2HSV)
 
-        lowerLimit, upperLimit = self.get_limits(color=self.orange)  # Get lower and upper color limits for orange
+        # Define orange color range in HSV
+        lower_orange1 = np.array([0, 135, 135])
+        lower_orange2 = np.array([15, 255, 255])
+        upper_orange1 = np.array([159, 135, 80])
+        upper_orange2 = np.array([179, 255, 255])
 
-        mask = cv2.inRange(hsvImage, lowerLimit, upperLimit)  # Create a mask using color limits
+        # Threshold the HSV image to get only bright orange colors
+        imgThreshLow = cv2.inRange(hsv_img, lower_orange1, lower_orange2)
+        imgThreshHigh = cv2.inRange(hsv_img, upper_orange1, upper_orange2)
 
-        mask_ = Image.fromarray(mask)  # Convert mask to PIL Image format
+        # Bitwise-OR low and high thresholds
+        threshed_img = cv2.bitwise_or(imgThreshLow, imgThreshHigh)
 
-        bbox = mask_.getbbox()  # Get bounding box of the mask
+        # Smoothing operations
+        kernel = np.ones((5,5),np.uint8)
+        threshed_img_smooth = cv2.erode(threshed_img, kernel, iterations = 3)
+        threshed_img_smooth = cv2.dilate(threshed_img_smooth, kernel, iterations = 2)
+        smoothed_img = cv2.dilate(threshed_img_smooth, kernel, iterations = 11)
+        smoothed_img = cv2.erode(smoothed_img, kernel, iterations = 7)
 
-        if bbox is not None:  # Check if bounding box exists
-            x1, y1, x2, y2 = bbox  # Extract coordinates of the bounding box
+        # Detect edges
+        edges_img = cv2.Canny(smoothed_img, 100, 200)
+        contours, hierarchy = cv2.findContours(edges_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-            frame = cv2.rectangle(cv_image, (x1, y1), (x2, y2), (0, 255, 0), 5)  # Draw a rectangle around the detected object
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        fontScale = 2
+        fontColor = (0, 0, 255)
+        lineType = 2
 
-        cv2.imshow('frame', cv_image)  # Display the image with detected objects
-        cv2.waitKey(1)  # Wait for a short time
+        for cnt in contours:
+            boundingRect = cv2.boundingRect(cnt)
+            approx = cv2.approxPolyDP(cnt, 0.06 * cv2.arcLength(cnt, True), True)
+            if len(approx) == 3:
+                x, y, w, h = cv2.boundingRect(approx)
+                rect = (x, y, w, h)
+                cv2.rectangle(cv_image, (x, y), (x+w, y+h), (0, 255, 0), 3)
+                bottomLeftCornerOfText = (x, y)
+                cv2.putText(cv_image, 'traffic_cone', 
+                    bottomLeftCornerOfText, 
+                    font, 
+                    fontScale,
+                    fontColor,
+                    lineType)
 
-    # Method to calculate lower and upper color limits based on a given color
-    def get_limits(self, color):
-        c = np.uint8([[color]])  # Convert color to NumPy array (BGR format)
-        hsvC = cv2.cvtColor(c, cv2.COLOR_BGR2HSV)  # Convert BGR color to HSV color space
+        # Display the annotated image
+        cv2.imshow("Annotated Image", cv_image)
+        cv2.waitKey(3)
 
-        hue = hsvC[0][0][0]  # Get the hue value from the converted color
+        try:
+            self.image_pub.publish(self.bridge.cv2_to_imgmsg(cv_image, "bgr8"))
+        except CvBridgeError as e:
+            print(e)
 
-        # Handle red hue wrap-around
-        if hue >= 165:  # Upper limit for divided red hue
-            lowerLimit = np.array([hue - 10, 100, 100], dtype=np.uint8)
-            upperLimit = np.array([180, 255, 255], dtype=np.uint8)
-        elif hue <= 15:  # Lower limit for divided red hue
-            lowerLimit = np.array([0, 100, 100], dtype=np.uint8)
-            upperLimit = np.array([hue + 10, 255, 255], dtype=np.uint8)
-        else:  # Regular case
-            lowerLimit = np.array([hue - 10, 100, 100], dtype=np.uint8)
-            upperLimit = np.array([hue + 10, 255, 255], dtype=np.uint8)
-
-        return lowerLimit, upperLimit  # Return the calculated lower and upper color limits
-
-# Main function to initialize the object_detection class and start the ROS node
 def main(args):
-    ic = object_detection()  # Create an instance of the object_detection class
+    ic = image_converter()
     try:
-        rospy.spin()  # Keep the node running until shutdown
+        rospy.spin()
     except KeyboardInterrupt:
-        print("Shutting down")  # Handle keyboard interrupt
-    cv2.destroyAllWindows()  # Close OpenCV windows when the node shuts down
+        print("Shutting down")
+    cv2.destroyAllWindows()
 
-# Entry point of the script
 if __name__ == '__main__':
-    main(sys.argv)  # Call the main function with command line arguments
+    main(sys.argv)
